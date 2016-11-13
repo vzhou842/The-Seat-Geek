@@ -14,6 +14,8 @@ console.log('Server listening on port ' + port);
 var getRecommendation = require('./recommendations').getRecommendation;
 var getNearbyEvents = require('./locationevents').getNearbyEvents;
 var getEventsAtVenue = require('./venues');
+var getTaxonomyEvents = require('./taxonomies');
+var getQueryEvents = require('./query');
 
 app.post('/message', twilio.webhook({ validate : false }), function(req, res, next) {
 	var body = req.body.Body.trim().toLowerCase();
@@ -21,6 +23,7 @@ app.post('/message', twilio.webhook({ validate : false }), function(req, res, ne
 	var recString = 'are there performers like ';
     var cityString = 'what events are happening in ';
     var venString = 'what events are happening at ';
+    var taxRegex = /^what [a-z ]+ events are happening in /;
 
 	// Is there anything like <performer> near <zip>?
 	if (body.substring(0, recString.length) === recString) {
@@ -37,6 +40,12 @@ app.post('/message', twilio.webhook({ validate : false }), function(req, res, ne
     else if (body.substring(0, venString.length) === venString) {
 		getEventsAtVenue(body.substring(venString.length, body.length - 1), sendMessage.bind(null, res));
 	}
+
+    else if (taxRegex.test(body)){
+        var str = ' events are happening in ';
+        var i = body.indexOf(str);
+        getTaxonomyEvents(body.substring(5, i), body.substring(i + str.length, body.length - 1), sendMessage.bind(null, res));
+    }
 
 	else {
 		sendMessage(res, "Sorry, we didn't understand your question.");
