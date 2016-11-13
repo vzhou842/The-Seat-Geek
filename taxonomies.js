@@ -2,7 +2,7 @@ var client_id = 'NjE5NTkwOHwxNDc5MDE1MzQ0'
 
 var request = require('request');
 var shorten = require('./linkshortener');
-var getQueryEvents = require('./query');
+var getQueryEvents = require('./query').getQueryEvents;
 
 var city = 'houston';
 var taxonomy = 'sports';
