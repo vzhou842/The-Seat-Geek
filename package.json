@@ -1,0 +1,24 @@
+{
+  "name": "theseatgeek",
+  "version": "0.1.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vzhou842/The-Seat-Geek.git"
+  },
+  "keywords": [
+    "The",
+    "Seat",
+    "Geek"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vzhou842/The-Seat-Geek/issues"
+  },
+  "homepage": "https://github.com/vzhou842/The-Seat-Geek#readme"
+}
