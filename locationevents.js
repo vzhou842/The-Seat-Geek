@@ -25,7 +25,7 @@ function getNearbyEvents(zip, callback){
             });
         }
         else{
-            console.log(JSON.stringify(response, null, 2));
+            callback("Sorry, we couldn't perform your request.");
         }
     })
 }
