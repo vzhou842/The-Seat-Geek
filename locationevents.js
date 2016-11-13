@@ -1,8 +1,5 @@
 var message = 'What are events happening around me';
 
-
-var city = 'los angeles';
-var event;
 var client_id = 'NjE5NTkwOHwxNDc5MDE1MzQ0'
 
 var request = require('request');
@@ -31,8 +28,6 @@ function getNearbyEvents(city, callback){
     })
 }
 
-getNearbyEvents(city, console.log)
-
 module.exports = {
-    getNearbyEvents: getNearbyEvents
-}
+    getNearbyEvents: getNearbyEvents,
+};
