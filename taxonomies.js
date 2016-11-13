@@ -34,6 +34,8 @@ function getTaxonomyEvents(city, taxonomy, callback){
     })
 }
 
+getTaxonomyEvents(city, taxonomy, console.log);
+
 module.exports = {
     getTaxonomyEvents: getTaxonomyEvents,
 };

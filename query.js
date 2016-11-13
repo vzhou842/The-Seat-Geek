@@ -15,6 +15,7 @@ function getQueryEvents(city, query, callback){
             var events = body.events.slice(0, 5);
             if(events.length === 0){
                 callback("Sorry, but we weren't able to find any events in " + city + ".");
+                return;
             }
             var eventNames = events.map(function(o) { return o.title; });
             var eventUrls = events.map(function(o) { return o.url; });
