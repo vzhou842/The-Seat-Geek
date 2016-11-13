@@ -10,4 +10,18 @@ function shorten(url, callback) {
 	});
 }
 
-module.exports = shorten;
+function shortenAll(urls, callback) {
+	var ret = [];
+	var numDone = 0;
+	urls.forEach(function(url, index) {
+		shorten(url, function(short) {
+			ret[index] = short;
+			numDone++;
+			if (numDone >= urls.length) {
+				callback(ret);
+			}
+		});
+	});
+}
+
+module.exports = shortenAll;
