@@ -42,9 +42,9 @@ app.post('/message', twilio.webhook({ validate : false }), function(req, res, ne
 	}
 
     else if (taxRegex.test(body)){
-        sendMessage(res, "found");
         var str = ' events are happening in ';
         var i = body.indexOf(str);
+        sendMessage(res, body.substring(i + str.length, body.length - 1) + ':' + body.substring(5, i));
         getTaxonomyEvents(body.substring(i + str.length, body.length - 1), body.substring(5, i), sendMessage.bind(null, res));
     }
 
