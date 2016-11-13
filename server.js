@@ -34,7 +34,7 @@ app.post('/message', twilio.webhook({ validate : false }), function(req, res, ne
     // What events are happening at <venue>?
     var venString = 'what events are happening at ';
     if (body.substring(0, venString.length) === venString) {
-		getEventsAtVenue(body.substring(venString.length + 1, body.length - 1), sendMessage.bind(null, res));
+		getEventsAtVenue(body.substring(venString.length, body.length - 1), sendMessage.bind(null, res));
 	}
 });
 
