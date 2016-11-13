@@ -17,8 +17,9 @@ function getRecommendation(performer, zip, callback) {
 					function(err, response, body) {
 						if (!err && response.statusCode === 200) {
 							body = JSON.parse(body);
-							var titles = body.recommendations.map(function(o) { return o.event.title; });
-							var urls = body.recommendations.map(function(o) { return o.event.url; });
+							var recs = body.recommendations.slice(0, 5);
+							var titles = recs.map(function(o) { return o.event.title; });
+							var urls = recs.map(function(o) { return o.event.url; });
 
 							shorten(urls, function(urls) {
 								var message = 'We might have found some events you might like:';
