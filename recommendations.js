@@ -1,7 +1,5 @@
 var request = require('request');
-
-var performer = 'Taylor Swift';
-var zip = '08544';
+var shorten = require('./linkshortener');
 
 var SEATGEEK_CLIENT_ID = 'NjE5NTkwOHwxNDc5MDE1MzQ0';
 
@@ -20,11 +18,15 @@ function getRecommendation(performer, zip, callback) {
 						if (!err && response.statusCode === 200) {
 							body = JSON.parse(body);
 							var titles = body.recommendations.map(function(o) { return o.event.title; });
-							var message = 'We might have found some events you might like:';
-							titles.forEach(function(title) {
-								message += '\n' + title;
+							var urls = body.recommendations.map(function(o) { return o.event.url; });
+
+							shorten(urls, function(urls) {
+								var message = 'We might have found some events you might like:';
+								titles.forEach(function(title, i) {
+									message += '\n' + (i + 1) + '. ' + title + ': ' + urls[i];
+								});
+								callback(message);
 							});
-							callback(message);
 						} else {
 							callback('An error occurred.');
 						}
@@ -36,6 +38,8 @@ function getRecommendation(performer, zip, callback) {
 		}
 	});
 }
+
+getRecommendation('taylor swift', '08544', console.log);
 
 module.exports = {
 	getRecommendation: getRecommendation,
