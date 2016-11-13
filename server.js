@@ -1,4 +1,5 @@
 var express = require('express');
+var twilio = require('twilio');
 
 var app = express();
 
@@ -7,7 +8,9 @@ var port = process.env.PORT || 3500;
 var server = app.listen(port);
 console.log('Server listening on port ' + port);
 
-app.post('/message', function(req, res, next) {
+app.post('/message', twilio.webhook({ validate : false }), function(req, res, next) {
 	var body = req.body.Body.trim();
-	console.log('body', body);
+	var resp = new twilio.TwimlResponse();
+  	resp.message(body);
+    res.send(resp);
 });
