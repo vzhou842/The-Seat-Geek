@@ -37,4 +37,6 @@ function getRecommendation(performer, zip, callback) {
 	});
 }
 
-getRecommendation(performer, zip, console.log);
+module.exports = {
+	getRecommendation: getRecommendation,
+};
