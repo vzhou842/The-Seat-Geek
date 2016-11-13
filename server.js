@@ -1,7 +1,9 @@
 var express = require('express');
 var twilio = require('twilio');
+var bodyParser = require('body-parser');
 
 var app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Start listening.
 var port = process.env.PORT || 3500;
