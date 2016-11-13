@@ -14,11 +14,11 @@ function getNearbyEvents(city, callback){
 
         if (!error && response.statusCode == 200) {
             body = JSON.parse(body);
-
-            var eventNames = body.events.map(function(o) { return o.title; });
-            var eventUrls = body.events.map(function(o) { return o.url; });
+            var events = body.events.slice(0, 5);
+            var eventNames = events.map(function(o) { return o.title; });
+            var eventUrls = events.map(function(o) { return o.url; });
             shorten(eventUrls, function(urls) {
-                var message = 'Here are some popular events happening in ' + body.events[0].venue.city + ':';
+                var message = 'Here are some popular events happening in ' + events[0].venue.city + ':';
                 eventNames.forEach(function(title, i) {
                     message += '\n' + (i + 1) + '. ' + title + ': ' + urls[i];
                 });

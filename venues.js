@@ -17,7 +17,7 @@ function getEventsAtVenue(venue, callback) {
 				request('https://api.seatgeek.com/2/events?venue.id=' + venue.id, function(err, response, body) {
 					if (!err & response.statusCode === 200) {
 						body = JSON.parse(body);
-						var events = body.events;
+						var events = body.events.slice(0, 5);
 						var loc = venue.name + ' in ' + venue.display_location;
 						if (!events.length) {
 							callback('There are no events happening at ' + loc + ' in the near future :(')
