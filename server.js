@@ -18,19 +18,19 @@ var getEventsAtVenue = require('./venues');
 app.post('/message', twilio.webhook({ validate : false }), function(req, res, next) {
 	var body = req.body.Body.trim().toLowerCase();
 
-	var recString = 'are there performers like';
+	var recString = 'are there performers like ';
     var cityString = 'what events are happening in ';
     var venString = 'what events are happening at ';
 
 	// Is there anything like <performer> near <zip>?
 	if (body.substring(0, recString.length) === recString) {
-		getRecommendation(body.substring(recString.length + 1, body.length - 12), body.substring(body.length - 6, body.length - 1),
+		getRecommendation(body.substring(recString.length, body.length - 12), body.substring(body.length - 6, body.length - 1),
 			sendMessage.bind(null, res)
 		);
 	}
 
     else if (body.substring(0, cityString.length) == cityString) {
-        getNearbyEvents(body.substring(body.length - 6, body.length - 1), sendMessage.bind(null, res));
+        getNearbyEvents(body.substring(cityString.length, body.length - 1), sendMessage.bind(null, res));
     }
 
     // What events are happening at <venue>?
