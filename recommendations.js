@@ -39,8 +39,6 @@ function getRecommendation(performer, zip, callback) {
 	});
 }
 
-getRecommendation('taylor swift', '08544', console.log);
-
 module.exports = {
 	getRecommendation: getRecommendation,
 };
