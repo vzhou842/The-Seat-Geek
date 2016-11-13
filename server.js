@@ -27,14 +27,18 @@ app.post('/message', twilio.webhook({ validate : false }), function(req, res, ne
 	}
 
     recString = 'what are events happening in '
-    if (body.substring(0, recString.length) == recString){
+    else if (body.substring(0, recString.length) == recString){
         getNearbyEvents(body.substring(body.length - 6, body.length - 1), sendMessage.bind(null, res));
     }
 
     // What events are happening at <venue>?
     var venString = 'what events are happening at ';
-    if (body.substring(0, venString.length) === venString) {
+    else if (body.substring(0, venString.length) === venString) {
 		getEventsAtVenue(body.substring(venString.length, body.length - 1), sendMessage.bind(null, res));
+	}
+
+	else {
+		sendMessage(res, "Sorry, we didn't understand your question.");
 	}
 });
 
