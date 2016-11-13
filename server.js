@@ -20,7 +20,9 @@ app.post('/message', twilio.webhook({ validate : false }), function(req, res, ne
         function (error, response, body) {
 
         if (!error && response.statusCode == 200) {
-            resp.message(body);
+            var events = JSON.stringify(body);
+
+            resp.message(event.slice(0,30));
             res.send(resp);
         }
     })
