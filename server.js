@@ -16,9 +16,10 @@ var getRecommendation = require('./recommendations').getRecommendation;
 app.post('/message', twilio.webhook({ validate : false }), function(req, res, next) {
 	var body = req.body.Body.trim().toLowerCase();
 
+	// Is there anything like <performer> near <zip>?
 	var recString = 'is there anything like';
 	if (body.substring(0, recString.length) === recString) {
-		getRecommendation(body.substring(recString.length + 1, body.length - 7), body.substring(body.length - 6, body.length - 1),
+		getRecommendation(body.substring(recString.length + 1, body.length - 12), body.substring(body.length - 6, body.length - 1),
 			function(message) {
 				var resp = new twilio.TwimlResponse();
 			    resp.message(message);
