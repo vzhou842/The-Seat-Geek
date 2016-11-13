@@ -18,7 +18,7 @@ app.post('/message', twilio.webhook({ validate : false }), function(req, res, ne
 
 	var recString = 'is there anything like';
 	if (body.substring(0, recString.length) === recString) {
-		getRecommendation(body.substring(recString.length + 1, body.length - 7), body.substring(body.length - 6, 5),
+		getRecommendation(body.substring(recString.length + 1, body.length - 7), body.substring(body.length - 6, body.length - 1),
 			function(message) {
 				var resp = new twilio.TwimlResponse();
 			    resp.message(message);
